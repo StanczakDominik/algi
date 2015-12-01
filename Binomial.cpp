@@ -61,16 +61,34 @@ node* Union(node *l1, node* l2)
     }
 }
 
-// node *DeleteMax()
-// {
-//     if (!head) return NULL;
-//
-//     node *p = head;
-//     node *pMax = head;
-//     while(p)
-//     {
-//         if (p->key > pMax->key) pMax=p;
-//         p = p->next;
-//     }
-//
-//
+node *DeleteMax()
+{
+    if (!head) return NULL; //nie może niczego usunąć
+
+    node *p = head; //pointer do searcha
+    node *pMax = head;  //pointer na najwyższy element
+    while(p)        //lecimy po wszystkich korzeniach
+    {
+        if (p->key > pMax->key) pMax=p; //zapisujemy max
+        p = p->next;            //przechodzimy dalej
+    }
+    
+    node *t = pMax->child;  //bierzemy poddrzewo maksymalnego
+    
+    if(pMax->next)          //jesli nie byl ostatnim
+        pMax->next->prev=pMax->prev;    //obejście maksymalnego od strony przedniej
+    else    //jesli byl ostatnim
+        head->prev = pMax->prev; //gdyby lista byla cykliczna w obie strony nie musielibysmy robic special case.
+                                //ale pMax->next = nie head a null
+                                
+    if(pMax!=head)          //jesli nie byl pierwszym
+        pMax->prev->next=pMax->next;        //obejście maksymalnego od strony tylniej
+    else                    //jesli byl pierwszym
+        head=head->next;    //przesuwamy wskaznik na kolejnego bo ten wywalamy
+    
+    
+    //wstawiamy poddrzewo usuniętego maksymalnego w jego odpowiednie miejsce w kolejce, tym juz sie martwi union
+    head = Union(head, t);
+    
+    return pMax;
+}
