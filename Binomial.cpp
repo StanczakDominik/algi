@@ -92,3 +92,28 @@ node *DeleteMax()
     
     return pMax;
 }
+
+node *Extract(node *&head)  //wyciaganie pierwszego drzewa w danej kolejce ()
+{
+    node *p = head;
+    head = head->next;  //przesunięcie wskaźnika
+    if(head)
+        head->prev = p->prev; //obejście wyciągniętego
+        
+    p->next = null; //chcemy zwrocic drzewko, nie kolejke, right?
+    p->prev = null;
+    return p;
+}
+
+void AddTree(node* t)
+{
+    if(!head) head = t;
+    else
+    {
+        head->prev->next=t;
+        //t->next=null; niepotrzebne gdy zalozymy ze dodajemy DRZEWKO NA KONIEC a nie KOLEJKE NA KONIEC;
+                //tamto i tak jest bez sensu i trzeba by zrobic to przez UNION
+        t->prev=head->prev;
+        head->prev=t;
+    }
+}
