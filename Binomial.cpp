@@ -32,18 +32,43 @@ void Insert(int v)
     head = Union(head, q);
 }
 
-node* Union(node *l1, node* l2)
-{
-    node *p1 = l1;                      //wskaźnik na pierwszej liście
-    node *p2 = l2;                      //wskaźnik na drugiej liście
 
+
+node* Union(node *p1, node* p2)
+{
+    node *t1;                      //wskaźnik na pierwszej liście
+    node *t2;                      //wskaźnik na drugiej liście
+    //moznaby je wyzej zainicjalizowac NOale jest za duzo opcji zeby to bylo jakkolwiek przydatne
     node *przeniesienie;
 
-    int k=0;
-    while(p1, p2)                       //jedziemy od najniższych
+    while(p1 || p2)                       //jedziemy od najniższych
     {
-        if //nie istnieje żadne z drzew o wysokości k
+        if (!p1)//nie istnieje żadne z drzew o wysokości k
+        {
             //nie dorzucamy drzew o wysokości k
+            t1 = Extract(p2)
+            t2 = NULL;
+        }
+        else if (!p2)
+        {
+            t1 = Extract(p1);
+            t2 = NULL;
+        }       //na tym etapie wiemy: są obydwa
+        else if (p1->rank < p2->rank)
+        {
+            t1 = Extract(p1);
+            t2 = NULL;
+        }
+        else if (p1->rank > p2->rank)
+        {
+            t1 = Extract(p2);
+            t2 = NULL;
+        }
+        else
+        {
+            t1 = Extract(p1);
+            t2 = Extract(p2);
+        }
         if //na TYLKO jednej liście jest drzewo o wysokości k
             //wrzucamy
         if //na OBU listach jest drzewo o wysokości k
