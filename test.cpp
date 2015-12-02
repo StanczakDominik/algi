@@ -1,11 +1,14 @@
 #include <iostream>
+#include <random>
 using namespace std;
 
 int Max()
 {
-    cout << "boo" << endl;
+    return randint(0,2);
 }
 int main()
 {
-    Max();
+    for (int i =0; i<10; i++)
+        cout << Max() << " "
+    cout << endl;
 }
