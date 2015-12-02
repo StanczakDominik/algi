@@ -110,6 +110,36 @@ node* Union(node *p1, node* p2)
     return q;
 }
 
+node* UnionR(node *p1, node *p2);
+{
+    node *t1, *t2, *t3, *p3;
+
+    if(!p1) return p2;
+    if(!p2) return p1;
+
+    if(p1->rank < p2->rank)// jeśli pierwsze drzewko w kolejce 1 jest mniejsze od pierwszego w drugiej
+    {
+        t1 = Extract(p1);       //ciągniemy dżefo z pierwszej kolejki
+        p3 = UnionR(p1, p2);     //łączę drugą kolejkę i pierwszą z odpiętym frontowym dżefem
+        t1->prev = p3->prev;    //
+        t1->next = p3;
+        p3->prev = t1;
+        return t1;
+    }
+
+    if(p1->rank > p2->rank)     //przeciwnie, jesli pierwsza kolejka zaczyna się od większego drzewka niż pierwsze z drugiej
+    {
+        return UnionR(p2, p1); //????????????? czy kolejność ma znaczenie?
+    }
+
+    //to jest przypadek gdy mają ten sam rank
+    t1 = Extract(p1);
+    t2 = Extract(p2);
+    //wyciągamy po jednym z kolejki
+    t3 = MergeTree(t1, t2);
+
+    p3 = UnionR(p1, p2);
+    return UnionR(p3, t3);
 node *DeleteMax()
 {
     if (!head) return NULL; //nie może niczego usunąć
