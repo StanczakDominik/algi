@@ -15,6 +15,19 @@ void print(int* A)
 
 void InsertionSort(int* A)
 {
+  //początek posortowany lokalnie w czasie
+  for(int i=1; i<N; i++)
+  {
+    int v = A[i];
+    int j = i-1;
+    while(A[j]<v)
+    {
+      j--;
+    }
+    cout << j << endl;
+    swap(A[i],A[j]);
+    print(A);
+  }
 }
 void BubbleSort(int* A)
 {
@@ -39,6 +52,12 @@ void BubbleSort(int* A)
   }
 }
 
+
+//SelectionSort
+//Rozpisać na kartce i sprawdzić stabilność
+//On^2 porównań
+//On przestawień
+//dobry kiedy przestawienia są drogie (tzn nie tutaj)
 
 void SelectionSort(int * A)
 {
@@ -67,5 +86,5 @@ int main()
   //N defined at beginning!!!!
   int A[] = {5, 4, 3, 2, 1};
   print(A);
-  SelectionSort(A);
+  InsertionSort(A);
 }
