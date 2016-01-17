@@ -130,24 +130,24 @@ void Delete(int v)
   node **p = Search(v);
   if (!(*p)) return;
 
-  node *pp = *p;
+  node **pp = p;
   while(true)
   {
-    if(pp->next[0])
+    if((*pp)->next[0])
     {
-      pp = pp->next[0];
+      (*pp) = (*pp)->next[0];
     }
-    else if(pp->next[1])
+    else if((*pp)->next[1])
     {
-      pp = pp->next[1];
+      (*pp) = (*pp)->next[1];
     }
     else break;
   }
 
-  pp->next[1] = (*p)->next[1];
-  pp->next[0] = (*p)->next[0];
+  (*pp)->next[1] = (*p)->next[1];
+  (*pp)->next[0] = (*p)->next[0];
   node *temp = *p;
-  *p=pp;
+  *p=*pp;
   delete temp;
 }
 
@@ -172,7 +172,7 @@ int main()
   cout << "===========================" << endl;
   postorderbits(root);
   Delete(5);
-  // postorder(root);
+  postorder(root);
   if (*(Search(7))==NULL)
   {
     cout << "nope" << endl;
