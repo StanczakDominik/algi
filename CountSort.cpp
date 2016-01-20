@@ -48,29 +48,6 @@ void CountSort()
   }
 }
 
-void CountSort2()
-{
-  int count[No] = {0};
-  print(count, 0, 3);
-  for (int i =0; i<N; i++)
-  {
-    count[A[i]]++; //moze sie wysypac
-  }
-  print(count,0,3);
-  for (int i=1 ; i<No; i++)
-  {
-    count[i] += count[i-1];   //cumulative sum
-  }
-  print(count,0,3);
-  for (int i=N-1; i>0; i--)
-  {
-    printf("i %d\t A[i] %d\t count[A[i]] %d\n", i, A[i], count[A[i]]);
-    int x = count[A[i]]--;
-  }
-  cout << "dwie" << endl;
-  print(count,0,3);
-}
-
 int main()
 {
   print(A);
