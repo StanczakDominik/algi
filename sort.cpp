@@ -2,7 +2,10 @@
 #include <iostream>
 using namespace std;
 
-#define N 5
+#define N 6
+int A[] = {0, 6,5,4,3,2,1};
+// #define N 15
+// int A[] = {5, 4, 3, 2, 1, 6, 7, 8, 9, 10, 11, 5, 3, 2, 1};
 
 void print(int* A)
 {
@@ -12,7 +15,14 @@ void print(int* A)
   }
   printf("\n");
 }
-
+void print(int* A, int l, int r)
+{
+  for(int i=l; i<r; i++)
+  {
+    printf("%d ", A[i]);
+  }
+  printf("\n");
+}
 void InsertionSort(int* A)
 {
   //początek posortowany lokalnie w czasie
@@ -81,59 +91,96 @@ void SelectionSort(int * A)
   }
 }
 
-int Partition(int* A, int L, int R);
+// int Partition(int* A, int L, int R);
+//
+// void QuickSort1(int* A, int L, int R)
+// {
+//   int j = Partition(A, L, R);
+//   QuickSort1(A,L,j-1);
+//   QuickSort1(A,j+1, R);
+// }
+//
+// void QuickSort2(int* A, int L, int R)
+// {
+//   while(L<R)
+//   {
+//     int j = Partition(A, L, R);
+//     if(j-L < R-j)
+//     {
+//       QuickSort2(A, L, j-1);
+//       L=j+1;
+//     }
+//     else
+//     {
+//       QuickSort2(A,j+1,R);
+//       R=j-1;
+//     }
+//   }
+// }
 
-void QuickSort1(int* A, int L, int R)
-{
-  int j = Partition(A, L, R);
-  QuickSort1(A,L,j-1);
-  QuickSort1(A,j+1, R);
-}
+// void QuickSortNR(int*A)
+// {
+//   stack S;
+//   S.push(1, n);
+//   while(!(S.empty()))
+//   {
+//     l, S = S.pop(
 
-void QuickSort2(int* A, int L, int R)
+
+void Merge(int* A, int l, int d1, int d2)
 {
-  while(L<R)
+  int Nd = d1+d2;
+  int B[d1+d2];
+  int i = 0;
+  int i1 = l;
+  int i2 = l+d1;
+  for(int i =0; i<d1+d2; i++)
   {
-    int j = Partition(A, L, R);
-    if(j-L < R-j)
+    printf("i %d Ai1 %d Ai2 %d ", i, A[i1], A[i2]);
+    if(i1 < l+d1 && A[i1]<A[i2])
     {
-      QuickSort2(A, L, j-1);
-      L=j+1;
+      printf("taking %d\n", A[i1]);
+      B[i] = A[i1];
+      i1++;
     }
-    else
+    else if (i2 < l+d1+d2)
     {
-      QuickSort2(A,j+1,R);
-      R=j-1;
+      printf("taking %d\n", A[i1]);
+      B[i] = A[i2];
+      i2++;
     }
+  }
+  cout << "merged";
+  print(B, 0, d1+d2);
+  for (int i =0; i<d1+d2; i++)
+  {
+    A[l+i] = B[i];
   }
 }
 
-void QuickSortNR(int*A)
-{
-  stack S;
-  S.push(1, n);
-  while(!(S.empty()))
-  {
-    l, S = S.pop(
 
-
-void Merge(int* A, int l1, r1, );
 
 void MergeSort(int* A, int l, int r)
 {
-  if (l==r) return;
-
+  print(A, l, r);
+  if (l==r)
+  {
+    cout <<"sorted";
+    return;
+  }
   int m = (l+r)/2;
-  MergeSort(l,m);
-  MergeSort(m+1, r);
-  Merge(A, l,m, m+1, r);
+  print(A, l, m);
+  MergeSort(A,l,m);
+  print(A, m+1, r);
+  MergeSort(A, m+1, r);
+  Merge(A, l, m-l, r-m);
 }
 
-void MergeSortNR(int* A)
-{
-  stack S;
-  S.push(
-}
+// void MergeSortNR(int* A)
+// {
+//   // stack S;
+//   // S.push(
+// }
 
 void HeapSort(int* A);
 // {
@@ -142,8 +189,11 @@ void HeapSort(int* A);
 
 int main()
 {
+  // int A[] = {1, 2, 3, 4};
+  // Merge(A,0, 2, 2);
+  // print(A, 0, 4);
   //N defined at beginning!!!!
-  int A[] = {5, 4, 3, 2, 1};
-  print(A);
-  InsertionSort(A);
+  // print(A);
+  MergeSort(A, 1, N+1);
+  // print(A);
 }
