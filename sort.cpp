@@ -81,6 +81,65 @@ void SelectionSort(int * A)
   }
 }
 
+int Partition(int* A, int L, int R);
+
+void QuickSort1(int* A, int L, int R)
+{
+  int j = Partition(A, L, R);
+  QuickSort1(A,L,j-1);
+  QuickSort1(A,j+1, R);
+}
+
+void QuickSort2(int* A, int L, int R)
+{
+  while(L<R)
+  {
+    int j = Partition(A, L, R);
+    if(j-L < R-j)
+    {
+      QuickSort2(A, L, j-1);
+      L=j+1;
+    }
+    else
+    {
+      QuickSort2(A,j+1,R);
+      R=j-1;
+    }
+  }
+}
+
+void QuickSortNR(int*A)
+{
+  stack S;
+  S.push(1, n);
+  while(!(S.empty()))
+  {
+    l, S = S.pop(
+
+
+void Merge(int* A, int l1, r1, );
+
+void MergeSort(int* A, int l, int r)
+{
+  if (l==r) return;
+
+  int m = (l+r)/2;
+  MergeSort(l,m);
+  MergeSort(m+1, r);
+  Merge(A, l,m, m+1, r);
+}
+
+void MergeSortNR(int* A)
+{
+  stack S;
+  S.push(
+}
+
+void HeapSort(int* A);
+// {
+  // while(
+// }
+
 int main()
 {
   //N defined at beginning!!!!
